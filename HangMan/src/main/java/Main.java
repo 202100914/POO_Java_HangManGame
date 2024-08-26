@@ -2,9 +2,9 @@
 public class Main {
 
     public static void main(String[] args) {
-        WordGuessingGame word = new WordGuessingGame();
+        FullGame fullGame = new FullGame();
 
-        word.play();
+        fullGame.play();
 
         // Encerrando o programa
         System.exit(0);

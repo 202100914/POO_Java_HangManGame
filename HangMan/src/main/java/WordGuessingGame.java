@@ -3,10 +3,12 @@ public class WordGuessingGame {
     private String guessedWord;
     private static int numberOfTries;
     private InputReader reader;
+    private WordGenerator wordGenerator;
 
     public WordGuessingGame(){
-        this.hiddenWord = "abc";
-        this.guessedWord = "___";
+        this.wordGenerator = new WordGenerator();
+        this.hiddenWord = wordGenerator.generateWord();
+        this.guessedWord = initializeGuessedWord(hiddenWord.length());
         this.numberOfTries = 0;
         reader = new InputReader();
     }
@@ -24,10 +26,17 @@ public class WordGuessingGame {
     }
 
     public void play(){
+        char cheat = '*';
+
         showWelcome();
 
         do{
             char letter = reader.getChar("");
+
+            if (letter == cheat) {
+                System.out.println("Cheat ativado! A palavra escondida é: " + getHiddenWord());
+                continue; // Salta para a próxima iteração do loop
+            }
 
             guess(letter);
 
@@ -73,5 +82,21 @@ public class WordGuessingGame {
 
     private void showGuessedWord(){
         System.out.println(getGuessedWord());
+    }
+
+    private String initializeGuessedWord(int length){
+        StringBuilder str = new StringBuilder();
+
+        for(int i = 0; i < length; i++){
+            str.append("_");
+        }
+
+        return str.toString();
+    }
+
+    public void reset(){
+        this.hiddenWord = wordGenerator.generateWord();
+        this.guessedWord = initializeGuessedWord(hiddenWord.length());
+        this.numberOfTries = 0;
     }
 }

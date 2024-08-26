@@ -8,7 +8,7 @@ public class WordGenerator {
 
     public WordGenerator() {
         fillArrayList();
-        rand = new Random();
+        rand = new Random(System.currentTimeMillis());
     }
 
     private void fillArrayList(){
